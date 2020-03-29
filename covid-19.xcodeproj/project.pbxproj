@@ -17,6 +17,7 @@
 		1E3B48F52430092500C586C6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3B48F42430092500C586C6 /* AVFoundation.framework */; };
 		1E8E65A124310B1F002C3021 /* DDTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A024310B1F002C3021 /* DDTableViewController.swift */; };
 		1E8E65A324310B70002C3021 /* DDSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */; };
+		1E8E65A724310EA7002C3021 /* DDParameterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A624310EA7002C3021 /* DDParameterStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		1E3B48F42430092500C586C6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1E8E65A024310B1F002C3021 /* DDTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDTableViewController.swift; sourceTree = "<group>"; };
 		1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSettingsTableViewController.swift; sourceTree = "<group>"; };
+		1E8E65A624310EA7002C3021 /* DDParameterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDParameterStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,8 @@
 				1E27B7482430F143003E849F /* Model */,
 				1E27B7462430F109003E849F /* Views */,
 				1E27B7472430F123003E849F /* Controllers */,
+				1E8E65A424310E4D002C3021 /* Helpers */,
+				1E8E65A524310E5E002C3021 /* Singletons */,
 				1E3B48E82430067D00C586C6 /* Assets.xcassets */,
 				1E3B48E52430067B00C586C6 /* Main.storyboard */,
 				1E3B48EA2430067D00C586C6 /* LaunchScreen.storyboard */,
@@ -126,6 +130,21 @@
 				1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */,
 			);
 			path = SettingsViewController;
+			sourceTree = "<group>";
+		};
+		1E8E65A424310E4D002C3021 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1E8E65A524310E5E002C3021 /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				1E8E65A624310EA7002C3021 /* DDParameterStore.swift */,
+			);
+			path = Singletons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E8E65A724310EA7002C3021 /* DDParameterStore.swift in Sources */,
 				1E8E65A324310B70002C3021 /* DDSettingsTableViewController.swift in Sources */,
 				1E3B48E02430067B00C586C6 /* AppDelegate.swift in Sources */,
 				1E8E65A124310B1F002C3021 /* DDTableViewController.swift in Sources */,
