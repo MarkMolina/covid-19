@@ -26,14 +26,21 @@ class DDCameraViewController: DDViewController {
         return layer
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupViews()
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        self.setupCamera()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        self.captureSession.stopRunning()
     }
     
     // MARK: Private
     
-    private func setupViews() {
+    private func setupCamera() {
         guard let device = AVCaptureDevice.default(for: .video) else {
             
             print("Unable to access back camera")
@@ -43,7 +50,9 @@ class DDCameraViewController: DDViewController {
         do {
             
             let input = try AVCaptureDeviceInput(device: device)
+            guard self.captureSession.canAddInput(input) else { return }
             // setup output
+            self.captureSession.addInput(input)
             
             self.setupLivePreview()
         }

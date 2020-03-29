@@ -15,6 +15,8 @@
 		1E3B48E92430067D00C586C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E3B48E82430067D00C586C6 /* Assets.xcassets */; };
 		1E3B48EC2430067D00C586C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3B48EA2430067D00C586C6 /* LaunchScreen.storyboard */; };
 		1E3B48F52430092500C586C6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3B48F42430092500C586C6 /* AVFoundation.framework */; };
+		1E8E65A124310B1F002C3021 /* DDTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A024310B1F002C3021 /* DDTableViewController.swift */; };
+		1E8E65A324310B70002C3021 /* DDSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		1E3B48EB2430067D00C586C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E3B48ED2430067D00C586C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E3B48F42430092500C586C6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1E8E65A024310B1F002C3021 /* DDTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDTableViewController.swift; sourceTree = "<group>"; };
+		1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSettingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				1E27B7492430F19E003E849F /* DDViewController.swift */,
+				1E8E65A024310B1F002C3021 /* DDTableViewController.swift */,
 				1E27B74B2430F1DB003E849F /* CameraViewController */,
+				1E8E659D2431013D002C3021 /* SettingsViewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -112,6 +118,14 @@
 				1E3B48F42430092500C586C6 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1E8E659D2431013D002C3021 /* SettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */,
+			);
+			path = SettingsViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,7 +199,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E8E65A324310B70002C3021 /* DDSettingsTableViewController.swift in Sources */,
 				1E3B48E02430067B00C586C6 /* AppDelegate.swift in Sources */,
+				1E8E65A124310B1F002C3021 /* DDTableViewController.swift in Sources */,
 				1E3B48E22430067B00C586C6 /* SceneDelegate.swift in Sources */,
 				1E27B74A2430F19E003E849F /* DDViewController.swift in Sources */,
 				1E27B74D2430F20B003E849F /* DDCameraViewController.swift in Sources */,
