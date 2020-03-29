@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1E27B74A2430F19E003E849F /* DDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E27B7492430F19E003E849F /* DDViewController.swift */; };
 		1E27B74D2430F20B003E849F /* DDCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E27B74C2430F20B003E849F /* DDCameraViewController.swift */; };
+		1E2E508A24313F1200B80EC5 /* DDInputPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2E508824313F1200B80EC5 /* DDInputPopupViewController.swift */; };
+		1E2E508B24313F1200B80EC5 /* DDInputPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E2E508924313F1200B80EC5 /* DDInputPopupViewController.xib */; };
 		1E3B48E02430067B00C586C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3B48DF2430067B00C586C6 /* AppDelegate.swift */; };
 		1E3B48E22430067B00C586C6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3B48E12430067B00C586C6 /* SceneDelegate.swift */; };
 		1E3B48E72430067B00C586C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3B48E52430067B00C586C6 /* Main.storyboard */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		1E27B7492430F19E003E849F /* DDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDViewController.swift; sourceTree = "<group>"; };
 		1E27B74C2430F20B003E849F /* DDCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDCameraViewController.swift; sourceTree = "<group>"; };
+		1E2E508824313F1200B80EC5 /* DDInputPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDInputPopupViewController.swift; sourceTree = "<group>"; };
+		1E2E508924313F1200B80EC5 /* DDInputPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DDInputPopupViewController.xib; sourceTree = "<group>"; };
 		1E3B48DC2430067B00C586C6 /* covid-19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "covid-19.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E3B48DF2430067B00C586C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E3B48E12430067B00C586C6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +55,8 @@
 		1E27B7462430F109003E849F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1E2E508824313F1200B80EC5 /* DDInputPopupViewController.swift */,
+				1E2E508924313F1200B80EC5 /* DDInputPopupViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -69,6 +75,7 @@
 		1E27B7482430F143003E849F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1E8E65A624310EA7002C3021 /* DDParameterStore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -107,7 +114,6 @@
 				1E27B7462430F109003E849F /* Views */,
 				1E27B7472430F123003E849F /* Controllers */,
 				1E8E65A424310E4D002C3021 /* Helpers */,
-				1E8E65A524310E5E002C3021 /* Singletons */,
 				1E3B48E82430067D00C586C6 /* Assets.xcassets */,
 				1E3B48E52430067B00C586C6 /* Main.storyboard */,
 				1E3B48EA2430067D00C586C6 /* LaunchScreen.storyboard */,
@@ -137,14 +143,6 @@
 			children = (
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		1E8E65A524310E5E002C3021 /* Singletons */ = {
-			isa = PBXGroup;
-			children = (
-				1E8E65A624310EA7002C3021 /* DDParameterStore.swift */,
-			);
-			path = Singletons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +205,7 @@
 			files = (
 				1E3B48EC2430067D00C586C6 /* LaunchScreen.storyboard in Resources */,
 				1E3B48E92430067D00C586C6 /* Assets.xcassets in Resources */,
+				1E2E508B24313F1200B80EC5 /* DDInputPopupViewController.xib in Resources */,
 				1E3B48E72430067B00C586C6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,6 +221,7 @@
 				1E8E65A324310B70002C3021 /* DDSettingsTableViewController.swift in Sources */,
 				1E3B48E02430067B00C586C6 /* AppDelegate.swift in Sources */,
 				1E8E65A124310B1F002C3021 /* DDTableViewController.swift in Sources */,
+				1E2E508A24313F1200B80EC5 /* DDInputPopupViewController.swift in Sources */,
 				1E3B48E22430067B00C586C6 /* SceneDelegate.swift in Sources */,
 				1E27B74A2430F19E003E849F /* DDViewController.swift in Sources */,
 				1E27B74D2430F20B003E849F /* DDCameraViewController.swift in Sources */,

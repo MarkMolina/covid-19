@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DDInputPopupViewController" customModule="covid_19" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomConstraint" destination="w9g-70-006" id="ady-7L-zlE"/>
+                <outlet property="buttonBottomConstraint" destination="Ova-hD-Lbf" id="7nj-YD-d1a"/>
+                <outlet property="inputField" destination="FKy-Rz-9oM" id="f7S-Ra-2L6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewHeigthConstraint" destination="XSV-TF-brN" id="Hlg-iv-S8P"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x3M-21-OoE">
+                    <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FKy-Rz-9oM">
+                            <rect key="frame" x="8" y="8" width="349" height="34"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="de7-cN-3tJ"/>
+                            </connections>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eM5-dG-Lz2">
+                            <rect key="frame" x="365" y="10" width="37" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="37" id="lRy-AR-Fg4"/>
+                            </constraints>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="dismissKeyboard:" destination="-1" eventType="touchUpInside" id="KnY-vP-eTy"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="FKy-Rz-9oM" secondAttribute="bottom" constant="8" id="0D4-DM-E9X"/>
+                        <constraint firstItem="eM5-dG-Lz2" firstAttribute="leading" secondItem="FKy-Rz-9oM" secondAttribute="trailing" constant="8" id="0ed-F4-dHS"/>
+                        <constraint firstItem="FKy-Rz-9oM" firstAttribute="top" secondItem="x3M-21-OoE" secondAttribute="top" constant="8" id="2I6-Ol-lQd"/>
+                        <constraint firstItem="FKy-Rz-9oM" firstAttribute="leading" secondItem="x3M-21-OoE" secondAttribute="leading" constant="8" id="GYB-8n-ysg"/>
+                        <constraint firstAttribute="height" constant="50" id="XSV-TF-brN"/>
+                        <constraint firstAttribute="trailing" secondItem="eM5-dG-Lz2" secondAttribute="trailing" constant="12" id="YmY-B2-Icu"/>
+                        <constraint firstItem="eM5-dG-Lz2" firstAttribute="top" secondItem="x3M-21-OoE" secondAttribute="top" constant="10" id="gQW-SZ-aWY"/>
+                        <constraint firstAttribute="bottom" secondItem="eM5-dG-Lz2" secondAttribute="bottom" constant="10" id="nhm-LP-WoV"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMM-f7-R3P">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="-1" eventType="touchUpInside" id="LUj-Sl-B5i"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aMM-f7-R3P" secondAttribute="trailing" id="Aib-xk-JyM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aMM-f7-R3P" secondAttribute="bottom" constant="50" id="Ova-hD-Lbf"/>
+                <constraint firstItem="x3M-21-OoE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kz6-qN-Mlk"/>
+                <constraint firstItem="aMM-f7-R3P" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lIU-vM-n5p"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="x3M-21-OoE" secondAttribute="bottom" id="w9g-70-006"/>
+                <constraint firstItem="x3M-21-OoE" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="xSH-xJ-0AH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="aMM-f7-R3P" secondAttribute="top" constant="44" id="xpM-Fc-5Zi"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
+        </view>
+    </objects>
+</document>

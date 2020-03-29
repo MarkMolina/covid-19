@@ -18,15 +18,22 @@ class DDSettingsTableViewController: DDTableViewController {
     @IBOutlet weak var repetitionsCell: UITableViewCell!
     @IBOutlet weak var flashIntensitySlider: UISlider!
     
-    private let label = UITextField()
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadParameterData), name: DDParameterStore.FlashDurationChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadParameterData), name: DDParameterStore.DelayChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadParameterData), name: DDParameterStore.ExposeTime1Changed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadParameterData), name: DDParameterStore.ExposeTime2Changed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadParameterData), name: DDParameterStore.ExposeTime3Changed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadParameterData), name: DDParameterStore.RepetitionsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadParameterData), name: DDParameterStore.FlashIntensityChanged, object: nil)
+        
         self.reloadParameterData()
     }
     
-    private func reloadParameterData() {
+    @objc private func reloadParameterData() {
         
         flashCell.detailTextLabel?.text = "\(DDParameterStore.shared.flashDuration)"
         delayCell.detailTextLabel?.text = "\(DDParameterStore.shared.delay)"
@@ -37,19 +44,90 @@ class DDSettingsTableViewController: DDTableViewController {
         flashIntensitySlider.value = DDParameterStore.shared.flashIntensity
     }
     
-    private func showInputPopup() {
-        
-        
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
+
+        let p = parameter(forIndex: indexPath.row, inSection: indexPath.section)
+        let popupVC = DDInputPopupViewController(value: p) { [weak self] (newValue) in
+            self?.set(parameter: newValue, forIndex: indexPath.row, inSection: indexPath.section)
+        }
+        present(popupVC, animated: true, completion: nil)
     }
     
     @IBAction func didUpdateFlashIntensity(_ sender: Any) {
         
         guard let slider = sender as? UISlider else { return }
         DDParameterStore.shared.flashIntensity = slider.value
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+fileprivate extension DDSettingsTableViewController {
+    
+    // MARK: GET
+    
+    private func parameter(forIndex: Int, inSection: Int) -> Double {
+        
+        switch inSection {
+            case 0: return timingParameter(forIndex: forIndex)
+            case 1: return additionalParameter(forIndex: forIndex)
+            default: return 0
+        }
+    }
+        
+    private func timingParameter(forIndex: Int) -> Double {
+        
+        switch forIndex {
+            case 0: return DDParameterStore.shared.flashDuration
+            case 1: return DDParameterStore.shared.delay
+            case 2: return DDParameterStore.shared.exposeTime1
+            case 3: return DDParameterStore.shared.exposeTime2
+            case 4: return DDParameterStore.shared.exposeTime3
+            default: return 0
+        }
+        
+    }
+    
+    private func additionalParameter(forIndex: Int) -> Double {
+        
+        switch forIndex {
+            case 0: return Double(DDParameterStore.shared.repetitions)
+            case 1: return Double(DDParameterStore.shared.flashIntensity)
+            default: return 0
+        }
+    }
+    
+    // MARK: SET
+    
+    private func set(parameter: Double, forIndex: Int, inSection: Int) {
+    
+        switch inSection {
+            case 0: set(timingParameter: parameter, forIndex: forIndex)
+            case 1: set(additionalParameter: parameter, forIndex: forIndex)
+        default: break
+        }
+    }
+    
+    private func set(timingParameter: Double, forIndex: Int) {
+        
+        switch forIndex {
+            case 0: DDParameterStore.shared.flashDuration = timingParameter
+            case 1: DDParameterStore.shared.delay = timingParameter
+            case 2: DDParameterStore.shared.exposeTime1 = timingParameter
+            case 3: DDParameterStore.shared.exposeTime2 = timingParameter
+            case 4: DDParameterStore.shared.exposeTime3 = timingParameter
+            default: break
+        }
+    }
+    
+    private func set(additionalParameter: Double, forIndex: Int) {
+        
+        switch forIndex {
+            case 0:  DDParameterStore.shared.repetitions = Int(additionalParameter)
+            case 1:  DDParameterStore.shared.flashIntensity = Float(additionalParameter)
+            default: break
+        }
     }
 }
