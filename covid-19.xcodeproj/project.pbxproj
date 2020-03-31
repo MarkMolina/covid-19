@@ -17,6 +17,8 @@
 		1E3B48E92430067D00C586C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E3B48E82430067D00C586C6 /* Assets.xcassets */; };
 		1E3B48EC2430067D00C586C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3B48EA2430067D00C586C6 /* LaunchScreen.storyboard */; };
 		1E3B48F52430092500C586C6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3B48F42430092500C586C6 /* AVFoundation.framework */; };
+		1E526684243253B900B9DB85 /* DDCameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E526683243253B900B9DB85 /* DDCameraButton.swift */; };
+		1E5266882433969200B9DB85 /* DDCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5266872433969200B9DB85 /* DDCaptureProcessor.swift */; };
 		1E8E65A124310B1F002C3021 /* DDTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A024310B1F002C3021 /* DDTableViewController.swift */; };
 		1E8E65A324310B70002C3021 /* DDSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */; };
 		1E8E65A724310EA7002C3021 /* DDParameterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A624310EA7002C3021 /* DDParameterStore.swift */; };
@@ -35,6 +37,8 @@
 		1E3B48EB2430067D00C586C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E3B48ED2430067D00C586C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E3B48F42430092500C586C6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1E526683243253B900B9DB85 /* DDCameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDCameraButton.swift; sourceTree = "<group>"; };
+		1E5266872433969200B9DB85 /* DDCaptureProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDCaptureProcessor.swift; sourceTree = "<group>"; };
 		1E8E65A024310B1F002C3021 /* DDTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDTableViewController.swift; sourceTree = "<group>"; };
 		1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSettingsTableViewController.swift; sourceTree = "<group>"; };
 		1E8E65A624310EA7002C3021 /* DDParameterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDParameterStore.swift; sourceTree = "<group>"; };
@@ -55,8 +59,8 @@
 		1E27B7462430F109003E849F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1E2E508824313F1200B80EC5 /* DDInputPopupViewController.swift */,
-				1E2E508924313F1200B80EC5 /* DDInputPopupViewController.xib */,
+				1E5266822432539800B9DB85 /* CameraButtonView */,
+				1E5266812432538700B9DB85 /* InputPopupViewController */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -130,6 +134,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1E5266812432538700B9DB85 /* InputPopupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1E2E508824313F1200B80EC5 /* DDInputPopupViewController.swift */,
+				1E2E508924313F1200B80EC5 /* DDInputPopupViewController.xib */,
+			);
+			path = InputPopupViewController;
+			sourceTree = "<group>";
+		};
+		1E5266822432539800B9DB85 /* CameraButtonView */ = {
+			isa = PBXGroup;
+			children = (
+				1E526683243253B900B9DB85 /* DDCameraButton.swift */,
+			);
+			path = CameraButtonView;
+			sourceTree = "<group>";
+		};
 		1E8E659D2431013D002C3021 /* SettingsViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +162,7 @@
 		1E8E65A424310E4D002C3021 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1E5266872433969200B9DB85 /* DDCaptureProcessor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -222,7 +244,9 @@
 				1E3B48E02430067B00C586C6 /* AppDelegate.swift in Sources */,
 				1E8E65A124310B1F002C3021 /* DDTableViewController.swift in Sources */,
 				1E2E508A24313F1200B80EC5 /* DDInputPopupViewController.swift in Sources */,
+				1E5266882433969200B9DB85 /* DDCaptureProcessor.swift in Sources */,
 				1E3B48E22430067B00C586C6 /* SceneDelegate.swift in Sources */,
+				1E526684243253B900B9DB85 /* DDCameraButton.swift in Sources */,
 				1E27B74A2430F19E003E849F /* DDViewController.swift in Sources */,
 				1E27B74D2430F20B003E849F /* DDCameraViewController.swift in Sources */,
 			);
@@ -369,6 +393,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q8L9S36XR2;
 				INFOPLIST_FILE = "covid-19/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -386,6 +411,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q8L9S36XR2;
 				INFOPLIST_FILE = "covid-19/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

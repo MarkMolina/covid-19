@@ -33,13 +33,102 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efR-CH-VC6">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efR-CH-VC6">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9N-BC-kkP" customClass="DDCameraButton" customModule="covid_19" customModuleProvider="target">
+                                        <rect key="frame" x="174" y="686" width="66" height="66"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="66" id="3NE-hG-s1g"/>
+                                            <constraint firstAttribute="width" constant="66" id="A9o-6X-sNL"/>
+                                        </constraints>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="runTest:" destination="LxG-F6-xfo" eventType="touchUpInside" id="qX0-Tv-vpw"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZLa-Fo-0aL">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="206"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THv-VV-5fE">
+                                                <rect key="frame" x="204" y="12" width="200" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="IB9-Fh-AIZ"/>
+                                                </constraints>
+                                                <state key="normal" title="Flash duration: 500"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khE-hm-xac">
+                                                <rect key="frame" x="206" y="50" width="200" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="8sa-14-0bR"/>
+                                                </constraints>
+                                                <state key="normal" title="Delay: 10"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5n-FE-D3J">
+                                                <rect key="frame" x="206" y="88" width="200" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="1uo-VM-njc"/>
+                                                </constraints>
+                                                <state key="normal" title="Expose (time point #1): 300"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCB-88-WHG">
+                                                <rect key="frame" x="206" y="126" width="200" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="qJ6-IN-gCt"/>
+                                                </constraints>
+                                                <state key="normal" title="Expose (time point #2): 300"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8l-dT-D9d">
+                                                <rect key="frame" x="206" y="164" width="200" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="7TL-E9-oUs"/>
+                                                </constraints>
+                                                <state key="normal" title="Expose (time point #3): 300"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="E5n-FE-D3J" secondAttribute="trailing" constant="8" id="7Vh-Lz-Wbq"/>
+                                            <constraint firstAttribute="trailing" secondItem="Z8l-dT-D9d" secondAttribute="trailing" constant="8" id="JKg-mM-iEh"/>
+                                            <constraint firstItem="khE-hm-xac" firstAttribute="top" secondItem="THv-VV-5fE" secondAttribute="bottom" constant="8" id="Kto-wv-Yva"/>
+                                            <constraint firstAttribute="trailing" secondItem="khE-hm-xac" secondAttribute="trailing" constant="8" id="Kwc-RJ-MOa"/>
+                                            <constraint firstAttribute="trailing" secondItem="jCB-88-WHG" secondAttribute="trailing" constant="8" id="RzD-mc-QVn"/>
+                                            <constraint firstItem="khE-hm-xac" firstAttribute="top" secondItem="THv-VV-5fE" secondAttribute="bottom" constant="8" id="TlH-hc-hPu"/>
+                                            <constraint firstItem="jCB-88-WHG" firstAttribute="top" secondItem="E5n-FE-D3J" secondAttribute="bottom" constant="8" id="csW-8m-9mp"/>
+                                            <constraint firstItem="jCB-88-WHG" firstAttribute="top" secondItem="E5n-FE-D3J" secondAttribute="bottom" constant="8" id="dj7-pe-26t"/>
+                                            <constraint firstItem="THv-VV-5fE" firstAttribute="top" secondItem="ZLa-Fo-0aL" secondAttribute="top" constant="12" id="ef3-ec-npF"/>
+                                            <constraint firstAttribute="trailing" secondItem="THv-VV-5fE" secondAttribute="trailing" constant="10" id="ete-Ju-DjR"/>
+                                            <constraint firstItem="E5n-FE-D3J" firstAttribute="top" secondItem="khE-hm-xac" secondAttribute="bottom" constant="8" id="fz3-Op-fPv"/>
+                                            <constraint firstAttribute="height" constant="206" id="hgm-Ho-3Mq"/>
+                                            <constraint firstItem="Z8l-dT-D9d" firstAttribute="top" secondItem="jCB-88-WHG" secondAttribute="bottom" constant="8" id="hoV-t5-UkK"/>
+                                            <constraint firstItem="E5n-FE-D3J" firstAttribute="top" secondItem="khE-hm-xac" secondAttribute="bottom" constant="8" id="phL-9p-Y61"/>
+                                            <constraint firstItem="Z8l-dT-D9d" firstAttribute="top" secondItem="jCB-88-WHG" secondAttribute="bottom" constant="8" id="x0w-e8-jfU"/>
+                                            <constraint firstAttribute="bottom" secondItem="Z8l-dT-D9d" secondAttribute="bottom" constant="12" id="xPY-7A-31W"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="s9N-BC-kkP" secondAttribute="bottom" constant="56" id="Rlj-hN-LiN"/>
+                                    <constraint firstItem="ZLa-Fo-0aL" firstAttribute="top" secondItem="efR-CH-VC6" secondAttribute="top" id="UcO-9R-tPr"/>
+                                    <constraint firstItem="ZLa-Fo-0aL" firstAttribute="top" secondItem="efR-CH-VC6" secondAttribute="top" id="c6F-zV-2vJ"/>
+                                    <constraint firstItem="ZLa-Fo-0aL" firstAttribute="leading" secondItem="efR-CH-VC6" secondAttribute="leading" id="dtg-9m-yhd"/>
+                                    <constraint firstItem="s9N-BC-kkP" firstAttribute="centerX" secondItem="efR-CH-VC6" secondAttribute="centerX" id="o5P-Td-bzS"/>
+                                    <constraint firstItem="ZLa-Fo-0aL" firstAttribute="leading" secondItem="efR-CH-VC6" secondAttribute="leading" id="qJP-Sb-oQE"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZLa-Fo-0aL" secondAttribute="trailing" id="y0J-GL-fh0"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZLa-Fo-0aL" secondAttribute="trailing" id="yST-W6-3HI"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="efR-CH-VC6" firstAttribute="centerX" secondItem="8W0-zN-ijg" secondAttribute="centerX" id="E7Y-HL-XhV"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="efR-CH-VC6" secondAttribute="bottom" constant="-34" id="Uv0-EN-vgb"/>
+                            <constraint firstItem="efR-CH-VC6" firstAttribute="top" secondItem="EVr-dZ-hFy" secondAttribute="top" id="g2X-EQ-77A"/>
+                            <constraint firstItem="efR-CH-VC6" firstAttribute="leading" secondItem="EVr-dZ-hFy" secondAttribute="leading" id="xTY-Oj-6ug"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="EVr-dZ-hFy"/>
                     </view>
                     <navigationItem key="navigationItem" title="Covid-19 Test" id="yNZ-DC-wbK">
@@ -55,7 +144,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyv-wy-7rZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1304" y="154"/>
+            <point key="canvasLocation" x="-1304.3478260869567" y="153.34821428571428"/>
         </scene>
         <!--Settings Table View Controller-->
         <scene sceneID="REK-WF-dSy">
@@ -75,8 +164,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Flash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wnK-2O-1V1">
-                                                    <rect key="frame" x="20" y="12" width="40.5" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Flash duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wnK-2O-1V1">
+                                                    <rect key="frame" x="20" y="12" width="108.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>

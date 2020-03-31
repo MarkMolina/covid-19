@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Logo-Hor-WhiteTransparent.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Logo-Hor-WhiteTransparent-1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Logo-Hor-WhiteTransparent-2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
