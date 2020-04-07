@@ -10,17 +10,18 @@ import UIKit
 import AVFoundation
 
 class DDCameraViewController: DDViewController {
-
+    
     private enum TestState: String {
         case ready = "ready"
         case running = "waiting"
     }
     
     @IBOutlet weak var previewLayer: UIView!
+    @IBOutlet weak var cameraButton: DDCameraButton!
     
     private lazy var captureSession: AVCaptureSession = {
         let captureSession = AVCaptureSession()
-        captureSession.sessionPreset = .hd4K3840x2160
+        captureSession.sessionPreset = .photo
         return captureSession
     }()
     
@@ -37,9 +38,25 @@ class DDCameraViewController: DDViewController {
         return output
     }()
     
+    private let device: AVCaptureDevice? = {
+        AVCaptureDevice.default(.builtInTelephotoCamera, for: .video, position: .back)
+    }()
+    
+    private let processor = DDCaptureProcessor()
+    
+    private var flashStartTime: Date = Date()
+    private var flashEndTime: Date = Date()
+    
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
+        
+        guard (device != nil) else {
+            
+            print("Unable to access back camera")
+            return
+        }
+        
         self.setupCamera()
     }
     
@@ -55,21 +72,19 @@ class DDCameraViewController: DDViewController {
     // MARK: Private
     
     private func setupCamera() {
-        guard let device = AVCaptureDevice.default(for: .video) else {
-            
-            print("Unable to access back camera")
-            return
-        }
         
         do {
             
-            let input = try AVCaptureDeviceInput(device: device)
-            guard self.captureSession.canAddInput(input) else { return }
+            let input = try AVCaptureDeviceInput(device: device!)
+            guard captureSession.canAddInput(input) else { return }
+            guard captureSession.canAddOutput(photoOutpout) else { return }
             
-            self.captureSession.addInput(input)
-            self.captureSession.addOutput(photoOutpout)
+            captureSession.beginConfiguration()
+            captureSession.addInput(input)
+            captureSession.addOutput(photoOutpout)
+            captureSession.commitConfiguration()
             
-            self.setupLivePreview()
+            setupLivePreview()
         }
         catch let error {
             print("Unable to initialize back camera: \(error.localizedDescription)")
@@ -91,6 +106,16 @@ class DDCameraViewController: DDViewController {
         }
     }
     
+    @IBAction private func didTapEdit() {
+        
+        let min = Float(device!.activeFormat.minExposureDuration.seconds)
+        let max = Float(device!.activeFormat.maxExposureDuration.seconds)
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "DDSettingsTableViewController") as! DDSettingsTableViewController
+        vc.exposureMinMax = (min, max)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @IBAction func runTest(_ sender: Any) {
         
         start()
@@ -100,22 +125,39 @@ class DDCameraViewController: DDViewController {
 extension DDCameraViewController {
     
     private func toggleTorch(on: Bool) {
-        
-        guard let device = AVCaptureDevice.default(for: .video) else { return }
 
-        if device.hasTorch {
+        if device!.hasTorch {
             do {
-                try device.lockForConfiguration()
+                try device!.lockForConfiguration()
                 
                 if on == true {
-                    try device.setTorchModeOn(level: DDParameterStore.shared.flashIntensity)
+                    try device!.setTorchModeOn(level: DDParameterStore.shared.flashIntensity)
                 } else {
-                    device.torchMode = .off
+                    device!.torchMode = .off
                 }
+                
+                print("Flash: \(on)")
 
-                device.unlockForConfiguration()
+                device!.unlockForConfiguration()
             } catch { print("Torch could not be used") }
         } else { print("Torch is not available") }
+    }
+    
+    private func setExposureSettings(completionHandler: ((CMTime) -> Void)?) {
+        
+        do {
+            try device!.lockForConfiguration()
+            
+            let exposureDuration = CMTimeMakeWithSeconds(Double(DDParameterStore.shared.exposeTime1 * 1000), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+            device!.exposureMode = .custom
+            
+            print(device!.activeFormat.minExposureDuration)
+            print(device!.activeFormat.maxExposureDuration)
+            device!.setExposureModeCustom(duration: device!.activeFormat.maxExposureDuration, iso: AVCaptureDevice.currentISO, completionHandler: completionHandler)
+            
+            device!.unlockForConfiguration()
+            
+        } catch { print("Failed setting exposure time") }
     }
 }
 
@@ -123,18 +165,55 @@ extension DDCameraViewController {
     
     private func start() {
         
-        guard let rawFormat = self.photoOutpout.availableRawPhotoPixelFormatTypes.first else { return }
-        let photoSettings = AVCapturePhotoSettings(rawPixelFormatType: rawFormat)
+        guard photoOutpout.availableRawPhotoPixelFormatTypes.contains(DDCaptureProcessor.RawFormat) else {
+            print("Required raw pixel format not found")
+            return
+        }
+        let photoSettings = AVCapturePhotoSettings(rawPixelFormatType: DDCaptureProcessor.RawFormat)
         photoSettings.isHighResolutionPhotoEnabled = true
         photoSettings.flashMode = .off
         
         // WIP: Implement timings
         
-        // Handle Flash
-        guard let device = AVCaptureDevice.default(for: .video) else { return }
-        toggleTorch(on: !device.isTorchActive)
+        // step 1: illuminate
+        startIllumination()
         
-        // Handle Photo
-        photoOutpout.capturePhoto(with: photoSettings, delegate: self)
+        // step 2: delay for afterburn
+        let delay = DDParameterStore.shared.delay.msToSeconds
+        Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { [weak self] (_) in
+            
+            guard let `self` = self else { return }
+            
+            // step 3: expose
+            self.setExposureSettings(completionHandler: { [unowned self] (_) in
+                
+                // lastly: process photo
+                //self.photoOutpout.capturePhoto(with: photoSettings, delegate: self.processor)
+            })
+        }
+    }
+    
+    private func startIllumination() {
+        
+        flashStartTime = Date()
+        toggleTorch(on: true)
+        
+        let duration = DDParameterStore.shared.flashDuration.msToSeconds
+        
+        Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { [weak self] (_) in
+            
+            guard let `self` = self else { return }
+            
+            guard self.device!.isTorchActive == true else {
+                print("Unexpected scenario occured. Flash wasn't on.")
+                return
+            }
+            
+            self.toggleTorch(on: false)
+            self.flashEndTime = Date()
+            
+            
+            print("Flash duration: \(self.flashEndTime.timeIntervalSince(self.flashStartTime).secondsToMiliseconds)")
+        }
     }
 }

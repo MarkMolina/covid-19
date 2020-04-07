@@ -17,7 +17,11 @@ class DDInputPopupViewController: DDViewController, UITextFieldDelegate {
     
     private let initialValue: Double
     private let valueDidChange: ((Double) -> ())?
-    
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        return formatter
+    }()
     
     init(value: Double, valueDidChange: ((Double) -> ())?) {
         
@@ -69,7 +73,9 @@ class DDInputPopupViewController: DDViewController, UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         
-        guard let value = textField.text as NSString? else { return }
+        guard let stringValue = textField.text as String? else { return }
+        guard let value = numberFormatter.number(from: stringValue) else { return }
+        
         valueDidChange?(value.doubleValue)
     }
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class DDSettingsTableViewController: DDTableViewController {
     
+    var exposureMinMax: (min: Float, max: Float)!
+    
     @IBOutlet weak var flashCell: UITableViewCell!
     @IBOutlet weak var delayCell: UITableViewCell!
     @IBOutlet weak var exposeCell1: UITableViewCell!
@@ -17,6 +19,7 @@ class DDSettingsTableViewController: DDTableViewController {
     @IBOutlet weak var exposeCell3: UITableViewCell!
     @IBOutlet weak var repetitionsCell: UITableViewCell!
     @IBOutlet weak var flashIntensitySlider: UISlider!
+    @IBOutlet weak var exposureSlider: UISlider!
     
     override func viewDidLoad() {
         
@@ -30,6 +33,10 @@ class DDSettingsTableViewController: DDTableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadParameterData), name: DDParameterStore.RepetitionsChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadParameterData), name: DDParameterStore.FlashIntensityChanged, object: nil)
         
+        exposureSlider.minimumValue = exposureMinMax.min
+        exposureSlider.maximumValue = exposureMinMax.max
+        exposureSlider.value = DDParameterStore.shared.exposeTime1
+        
         self.reloadParameterData()
     }
     
@@ -42,6 +49,7 @@ class DDSettingsTableViewController: DDTableViewController {
         exposeCell3.detailTextLabel?.text = "\(DDParameterStore.shared.exposeTime3)"
         repetitionsCell.detailTextLabel?.text = "\(DDParameterStore.shared.repetitions)"
         flashIntensitySlider.value = DDParameterStore.shared.flashIntensity
+        exposureSlider.value = DDParameterStore.shared.exposeTime1
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -53,10 +61,16 @@ class DDSettingsTableViewController: DDTableViewController {
         present(popupVC, animated: true, completion: nil)
     }
     
-    @IBAction func didUpdateFlashIntensity(_ sender: Any) {
+    @IBAction private func didUpdateFlashIntensity(_ sender: Any) {
         
         guard let slider = sender as? UISlider else { return }
         DDParameterStore.shared.flashIntensity = slider.value
+    }
+    
+    @IBAction private func didUpdateExposure(_ sender: Any) {
+        
+        guard let slider = sender as? UISlider else { return }
+        DDParameterStore.shared.exposeTime1 = slider.value
     }
     
     deinit {
@@ -82,9 +96,9 @@ fileprivate extension DDSettingsTableViewController {
         switch forIndex {
             case 0: return DDParameterStore.shared.flashDuration
             case 1: return DDParameterStore.shared.delay
-            case 2: return DDParameterStore.shared.exposeTime1
-            case 3: return DDParameterStore.shared.exposeTime2
-            case 4: return DDParameterStore.shared.exposeTime3
+            case 3: return Double(DDParameterStore.shared.exposeTime1)
+            case 4: return DDParameterStore.shared.exposeTime2
+            case 5: return DDParameterStore.shared.exposeTime3
             default: return 0
         }
         
@@ -115,9 +129,17 @@ fileprivate extension DDSettingsTableViewController {
         switch forIndex {
             case 0: DDParameterStore.shared.flashDuration = timingParameter
             case 1: DDParameterStore.shared.delay = timingParameter
-            case 2: DDParameterStore.shared.exposeTime1 = timingParameter
-            case 3: DDParameterStore.shared.exposeTime2 = timingParameter
-            case 4: DDParameterStore.shared.exposeTime3 = timingParameter
+            case 3:
+                let p = Float(timingParameter)
+                if p > exposureMinMax.max {
+                    DDParameterStore.shared.exposeTime1 = exposureMinMax.max
+                } else if p < exposureMinMax.min {
+                    DDParameterStore.shared.exposeTime1 = exposureMinMax.min
+                } else {
+                    DDParameterStore.shared.exposeTime1 = Float(timingParameter)
+                }
+            case 4: DDParameterStore.shared.exposeTime2 = timingParameter
+            case 5: DDParameterStore.shared.exposeTime3 = timingParameter
             default: break
         }
     }

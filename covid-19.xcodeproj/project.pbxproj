@@ -22,6 +22,7 @@
 		1E8E65A124310B1F002C3021 /* DDTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A024310B1F002C3021 /* DDTableViewController.swift */; };
 		1E8E65A324310B70002C3021 /* DDSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */; };
 		1E8E65A724310EA7002C3021 /* DDParameterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E65A624310EA7002C3021 /* DDParameterStore.swift */; };
+		1EAEBBA5243C87840025FAD5 /* Int+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAEBBA4243C87840025FAD5 /* Int+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		1E8E65A024310B1F002C3021 /* DDTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDTableViewController.swift; sourceTree = "<group>"; };
 		1E8E65A224310B70002C3021 /* DDSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSettingsTableViewController.swift; sourceTree = "<group>"; };
 		1E8E65A624310EA7002C3021 /* DDParameterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDParameterStore.swift; sourceTree = "<group>"; };
+		1EAEBBA4243C87840025FAD5 /* Int+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				1E5266872433969200B9DB85 /* DDCaptureProcessor.swift */,
+				1EAEBBA4243C87840025FAD5 /* Int+Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				1E5266882433969200B9DB85 /* DDCaptureProcessor.swift in Sources */,
 				1E3B48E22430067B00C586C6 /* SceneDelegate.swift in Sources */,
 				1E526684243253B900B9DB85 /* DDCameraButton.swift in Sources */,
+				1EAEBBA5243C87840025FAD5 /* Int+Helpers.swift in Sources */,
 				1E27B74A2430F19E003E849F /* DDViewController.swift in Sources */,
 				1E27B74D2430F20B003E849F /* DDCameraViewController.swift in Sources */,
 			);

@@ -12,7 +12,7 @@ final class DDParameterStore {
     
     static let shared = DDParameterStore()
     
-    var flashDuration = 600.0 {
+    var flashDuration = 1.0 {
         didSet {
             NotificationCenter.default.post(name: DDParameterStore.FlashDurationChanged, object: nil)
         }
@@ -24,7 +24,7 @@ final class DDParameterStore {
         }
     }
     
-    var exposeTime1 = 100.0 {
+    var exposeTime1: Float = 1.0 {
         didSet {
             NotificationCenter.default.post(name: DDParameterStore.ExposeTime1Changed, object: nil)
         }
