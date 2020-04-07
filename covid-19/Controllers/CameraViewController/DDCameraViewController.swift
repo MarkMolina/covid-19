@@ -47,6 +47,12 @@ class DDCameraViewController: DDViewController {
     private var flashStartTime: Date = Date()
     private var flashEndTime: Date = Date()
     
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(setExposureSettings), name: DDParameterStore.ExposeTime1Changed, object: nil)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
@@ -64,8 +70,13 @@ class DDCameraViewController: DDViewController {
         
         super.viewWillDisappear(animated)
         self.captureSession.stopRunning()
-        if let firstInput = self.captureSession.inputs.first {
-            self.captureSession.removeInput(firstInput)
+        
+        for input in captureSession.inputs {
+            captureSession.removeInput(input)
+        }
+        
+        for output in captureSession.outputs {
+            captureSession.removeOutput(output)
         }
     }
     
@@ -143,17 +154,21 @@ extension DDCameraViewController {
         } else { print("Torch is not available") }
     }
     
-    private func setExposureSettings(completionHandler: ((CMTime) -> Void)?) {
+    @objc private func setExposureSettings() {
         
         do {
             try device!.lockForConfiguration()
             
-            let exposureDuration = CMTimeMakeWithSeconds(Double(DDParameterStore.shared.exposeTime1 * 1000), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+            let exposureDuration = CMTimeMakeWithSeconds(Double(DDParameterStore.shared.exposeTime1), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
             device!.exposureMode = .custom
             
-            print(device!.activeFormat.minExposureDuration)
-            print(device!.activeFormat.maxExposureDuration)
-            device!.setExposureModeCustom(duration: device!.activeFormat.maxExposureDuration, iso: AVCaptureDevice.currentISO, completionHandler: completionHandler)
+            if exposureDuration.seconds < device!.activeFormat.minExposureDuration.seconds {
+                device!.setExposureModeCustom(duration: device!.activeFormat.minExposureDuration, iso: AVCaptureDevice.currentISO, completionHandler: nil)
+            } else {
+                device!.setExposureModeCustom(duration: exposureDuration, iso: AVCaptureDevice.currentISO, completionHandler: nil)
+            }
+            
+            
             
             device!.unlockForConfiguration()
             
@@ -179,17 +194,13 @@ extension DDCameraViewController {
         startIllumination()
         
         // step 2: delay for afterburn
-        let delay = DDParameterStore.shared.delay.msToSeconds
+        let delay = Double(DDParameterStore.shared.delay.msToSeconds)
         Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { [weak self] (_) in
             
-            guard let `self` = self else { return }
+            // step 3: expose (set by parameter)
             
-            // step 3: expose
-            self.setExposureSettings(completionHandler: { [unowned self] (_) in
-                
-                // lastly: process photo
-                //self.photoOutpout.capturePhoto(with: photoSettings, delegate: self.processor)
-            })
+            // step 4 (final): process photo
+            //self.photoOutpout.capturePhoto(with: photoSettings, delegate: self.processor)
         }
     }
     
@@ -198,7 +209,7 @@ extension DDCameraViewController {
         flashStartTime = Date()
         toggleTorch(on: true)
         
-        let duration = DDParameterStore.shared.flashDuration.msToSeconds
+        let duration = Double(DDParameterStore.shared.flashDuration.msToSeconds)
         
         Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { [weak self] (_) in
             

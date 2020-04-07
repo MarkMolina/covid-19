@@ -70,6 +70,18 @@ class DDSettingsTableViewController: DDTableViewController {
     @IBAction private func didUpdateExposure(_ sender: Any) {
         
         guard let slider = sender as? UISlider else { return }
+        let p = slider.value
+        if p > exposureMinMax.max {
+            
+            DDParameterStore.shared.exposeTime1 = exposureMinMax.max
+        } else if p <= exposureMinMax.min {
+            
+            DDParameterStore.shared.exposeTime1 = exposureMinMax.min
+        } else {
+            
+            DDParameterStore.shared.exposeTime1 = p
+        }
+        
         DDParameterStore.shared.exposeTime1 = slider.value
     }
     
@@ -82,7 +94,7 @@ fileprivate extension DDSettingsTableViewController {
     
     // MARK: GET
     
-    private func parameter(forIndex: Int, inSection: Int) -> Double {
+    private func parameter(forIndex: Int, inSection: Int) -> Float {
         
         switch inSection {
             case 0: return timingParameter(forIndex: forIndex)
@@ -91,12 +103,12 @@ fileprivate extension DDSettingsTableViewController {
         }
     }
         
-    private func timingParameter(forIndex: Int) -> Double {
+    private func timingParameter(forIndex: Int) -> Float {
         
         switch forIndex {
             case 0: return DDParameterStore.shared.flashDuration
             case 1: return DDParameterStore.shared.delay
-            case 3: return Double(DDParameterStore.shared.exposeTime1)
+            case 3: return DDParameterStore.shared.exposeTime1
             case 4: return DDParameterStore.shared.exposeTime2
             case 5: return DDParameterStore.shared.exposeTime3
             default: return 0
@@ -104,18 +116,18 @@ fileprivate extension DDSettingsTableViewController {
         
     }
     
-    private func additionalParameter(forIndex: Int) -> Double {
+    private func additionalParameter(forIndex: Int) -> Float {
         
         switch forIndex {
-            case 0: return Double(DDParameterStore.shared.repetitions)
-            case 1: return Double(DDParameterStore.shared.flashIntensity)
+            case 0: return Float(DDParameterStore.shared.repetitions)
+            case 1: return DDParameterStore.shared.flashIntensity
             default: return 0
         }
     }
     
     // MARK: SET
     
-    private func set(parameter: Double, forIndex: Int, inSection: Int) {
+    private func set(parameter: Float, forIndex: Int, inSection: Int) {
     
         switch inSection {
             case 0: set(timingParameter: parameter, forIndex: forIndex)
@@ -124,7 +136,7 @@ fileprivate extension DDSettingsTableViewController {
         }
     }
     
-    private func set(timingParameter: Double, forIndex: Int) {
+    private func set(timingParameter: Float, forIndex: Int) {
         
         switch forIndex {
             case 0: DDParameterStore.shared.flashDuration = timingParameter
@@ -144,7 +156,7 @@ fileprivate extension DDSettingsTableViewController {
         }
     }
     
-    private func set(additionalParameter: Double, forIndex: Int) {
+    private func set(additionalParameter: Float, forIndex: Int) {
         
         switch forIndex {
             case 0:  DDParameterStore.shared.repetitions = Int(additionalParameter)

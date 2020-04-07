@@ -15,15 +15,15 @@ class DDInputPopupViewController: DDViewController, UITextFieldDelegate {
     @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewHeigthConstraint: NSLayoutConstraint!
     
-    private let initialValue: Double
-    private let valueDidChange: ((Double) -> ())?
+    private let initialValue: Float
+    private let valueDidChange: ((Float) -> ())?
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
         return formatter
     }()
     
-    init(value: Double, valueDidChange: ((Double) -> ())?) {
+    init(value: Float, valueDidChange: ((Float) -> ())?) {
         
         initialValue = value
         self.valueDidChange = valueDidChange
@@ -76,6 +76,6 @@ class DDInputPopupViewController: DDViewController, UITextFieldDelegate {
         guard let stringValue = textField.text as String? else { return }
         guard let value = numberFormatter.number(from: stringValue) else { return }
         
-        valueDidChange?(value.doubleValue)
+        valueDidChange?(value.floatValue)
     }
 }

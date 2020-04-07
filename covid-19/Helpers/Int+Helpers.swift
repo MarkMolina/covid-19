@@ -8,13 +8,24 @@
 
 import Foundation
 
-extension Double {
+extension Float {
     
-    var msToSeconds: Double {
-        Double(self) / 1000
+    var msToSeconds: Float {
+        Float(self) / 1000
     }
     
-    var secondsToMiliseconds: Double {
-        Double(self) * 1000
+    var secondsToMiliseconds: Float {
+        Float(self) * 1000
+    }
+}
+
+extension Double {
+    
+    var msToSeconds: Float {
+        Float(self) / 1000
+    }
+    
+    var secondsToMiliseconds: Float {
+        Float(self) * 1000
     }
 }
